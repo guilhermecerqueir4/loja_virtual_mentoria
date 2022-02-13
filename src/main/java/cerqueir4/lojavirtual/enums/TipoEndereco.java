@@ -14,6 +14,7 @@ public enum TipoEndereco {
 	public String getDescricao() {
 		return descricao;
 	}
+
 	
 	@Override
 	public String toString() {
