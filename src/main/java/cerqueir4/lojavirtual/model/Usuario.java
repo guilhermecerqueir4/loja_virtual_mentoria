@@ -42,12 +42,16 @@ public class Usuario implements UserDetails{
 	/* Ajustes e anotações para criar uma nova tabela de associação (Usuario_acesso), que unirá as tabelas: Usuario, Acesso */
 	/* Método funcional quando trabalhado com o Spring Security*/
 	@OneToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "usuarios_acesso", uniqueConstraints = @UniqueConstraint (columnNames = {"usuario_id", "acesso_id"} 
-	, name = "unique_acesso_user")
+	@JoinTable(name = "usuarios_acesso", uniqueConstraints = @UniqueConstraint (
+															columnNames = {"usuario_id", "acesso_id"} 
+															, name = "unique_acesso_user")
 	, joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id", table = "usuario"
-	, unique = false, foreignKey = @ForeignKey(name = "usuario_fk", value = ConstraintMode.CONSTRAINT))
-	, inverseJoinColumns = @JoinColumn(name = "acesso_id", unique = false, referencedColumnName = "id", table = "acesso"
-	, foreignKey = @ForeignKey(name = "acesso_fk", value = ConstraintMode.CONSTRAINT)) )
+								, unique = false, foreignKey = @ForeignKey(name = "usuario_fk", value = ConstraintMode.CONSTRAINT))
+	
+	, inverseJoinColumns = @JoinColumn(name = "acesso_id", 
+									unique = false, referencedColumnName = "id", table = "acesso"
+	, foreignKey = @ForeignKey(name = "acesso_fk", value = ConstraintMode.CONSTRAINT))
+	)
 	private List<Acesso> acessos;
 
 	/*Autoridades = São os acessos, ou seja ROLE_ADMIN, ROLE_SECRETARIO, ROLE_FINANCEIRO */ 

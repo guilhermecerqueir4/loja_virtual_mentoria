@@ -1,0 +1,1 @@
+/* Este arquivo é para carregar a criação da estrutura do banco para evitar que crie via JPA toda vez, podendo ocasionar erros. */
