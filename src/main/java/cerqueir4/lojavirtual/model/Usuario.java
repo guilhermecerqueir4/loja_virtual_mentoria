@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -33,11 +35,18 @@ public class Usuario implements UserDetails{
 	@Id 
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_usuario")
 	private Long id;
+	@Column(nullable = false)
 	private String login;
+	@Column(nullable = false)
 	private String senha;
 	
+	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dataAtualSenha;
+	
+	@ManyToOne(targetEntity = Pessoa.class)
+	@JoinColumn(name = "pessoa_id", nullable = false, foreignKey = @ForeignKey(value= ConstraintMode.CONSTRAINT, name = "pessoa_id_fk"))
+	private Pessoa pessoa;
 	
 	/* Ajustes e anotações para criar uma nova tabela de associação (Usuario_acesso), que unirá as tabelas: Usuario, Acesso */
 	/* Método funcional quando trabalhado com o Spring Security*/
